@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Scenes/Active Zones/3D_Dungeon.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0

@@ -1,0 +1,444 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GitHubApiStatus</name>
+    </assembly>
+    <members>
+        <member name="T:GitHubApiStatus.GitHubApiStatusService">
+            <summary>
+            GitHub API Status Service
+            </summary>
+        </member>
+        <member name="F:GitHubApiStatus.GitHubApiStatusService.RateLimitHeader">
+            <summary>
+            GitHub Http Response Rate Limit Header Key
+            </summary>
+        </member>
+        <member name="F:GitHubApiStatus.GitHubApiStatusService.RateLimitResetHeader">
+            <summary>
+            GitHub Http Response Rate Limit Reset Header Key
+            </summary>
+        </member>
+        <member name="F:GitHubApiStatus.GitHubApiStatusService.RateLimitRemainingHeader">
+            <summary>
+            GitHub Http Response Rate Limit Remaining Reset Header Key
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.#ctor">
+            <summary>
+            Initializes <see cref="N:GitHubApiStatus"/>
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.Finalize">
+            <summary>
+            Finalizes <see cref="N:GitHubApiStatus"/>
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.#ctor(System.Net.Http.Headers.AuthenticationHeaderValue,System.Net.Http.Headers.ProductHeaderValue)">
+            <summary>
+            Initializes <see cref="N:GitHubApiStatus"/>
+            </summary>
+            <param name="authenticationHeaderValue">GitHub Authentication Bearer Token</param>
+            <param name="productHeaderValue">User-Agent Name</param>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.#ctor(System.Net.Http.HttpClient)">
+            <summary>
+            Initializes <see cref="N:GitHubApiStatus"/>
+            </summary>
+            <param name="client">GitHub API requires the following Headers: Authorization and UserAgent</param>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiStatusService.IsProductHeaderValueValid">
+            <summary>
+            Determines if <see cref="P:System.Net.Http.HttpClient.DefaultRequestHeaders"/> UserAgent is Valid
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiStatusService.IsAuthenticationHeaderValueSet">
+            <summary>
+            Determines if <see cref="P:System.Net.Http.HttpClient.DefaultRequestHeaders"/> Authorization is Valid
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.Dispose">
+            <summary>
+            Dispose
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.AddProductHeaderValue(System.Net.Http.Headers.ProductHeaderValue)">
+            <summary>
+            Add <see cref="T:System.Net.Http.Headers.ProductHeaderValue"/>to <see cref="P:System.Net.Http.HttpClient.DefaultRequestHeaders"/> UserAgent
+            </summary>
+            <param name="productHeaderValue"></param>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.SetAuthenticationHeaderValue(System.Net.Http.Headers.AuthenticationHeaderValue)">
+            <summary>
+            Set <see cref="P:System.Net.Http.HttpClient.DefaultRequestHeaders"/> Authorization
+            </summary>
+            <param name="authenticationHeaderValue"></param>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.GetApiRateLimits">
+            <summary>
+            Get the API Rate Limits for the GitHub REST API, GraphQL API, Search API, Code Scanning API and App Manifest Configuration API
+            </summary>
+            <returns>The API Status for each GitHub API</returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.GetApiRateLimits(System.Threading.CancellationToken)">
+            <summary>
+            Get the API Rate Limits for the GitHub REST API, GraphQL API, Search API, Code Scanning API and App Manifest Configuration API
+            </summary>
+            <param name="cancellationToken">Cancellation Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.GetRateLimit(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get GitHub API Rate Limit
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>GitHub Api Rate Limit </returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.IsAbuseRateLimit(System.Net.Http.Headers.HttpResponseHeaders@,System.Nullable{System.TimeSpan}@)">
+            <summary>
+            Determines Whether GitHub's Abuse Rate Limit Has Been Reached
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <param name="delta">Time Remaining in Retry-After Header</param>
+            <returns></returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.HasReachedMaximumApiCallLimit(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Determines Whether GitHub's Maximum API Limit Has Been Reached
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Whether GitHub's Maximum API Limit Has Been Reached</returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.GetRemainingRequestCount(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get Number of GitHub API Requests Remaining
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Number of GitHub API Requests Remaining</returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.IsResponseFromAuthenticatedRequest(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Determines Whether the Http Response Was From an Authenticated Http Request
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Whether the Http Response Was From an Authenticated Http Request</returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.GetRateLimitTimeRemaining(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get Time Remaining Until GitHub API Rate Limit Resets
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Time Remaining Until GitHub API Rate Limit Resets</returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.GetRateLimitResetDateTime(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get the DateTimeOffset When the GitHub API Rate Limit Will Reset
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>DateTimeOffset When the GitHub API Rate Limit Will Reset</returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.GetRateLimitResetDateTime_UnixEpochSeconds(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get the Unix Epoch Seconds When the GitHub API Rate Limit Will Reset
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Unix Epoch Seconds When the GitHub API Rate Limit Will Reset</returns>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusService.Dispose(System.Boolean)">
+            <summary>
+            Handle disposing of <see cref="N:GitHubApiStatus"/>
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="T:GitHubApiStatus.RateLimitStatus">
+            <summary>
+            GitHub API Rate Limit Status
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.RateLimitStatus.#ctor(System.Int32,System.Int32,System.Int64)">
+            <summary>
+            Create GitHub Rate Limit Status
+            </summary>
+            <param name="limit">Maximum API Requests</param>
+            <param name="remaining">Remaining API Requests</param>
+            <param name="reset">Rate Limit Reset Time Stamp in Unix Epoch Seconds</param>
+        </member>
+        <member name="P:GitHubApiStatus.RateLimitStatus.RateLimitReset_TimeRemaining">
+            <summary>
+            Time Remaining until Rate Limit Reset
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.RateLimitStatus.RateLimit">
+            <summary>
+            GitHub API Rate Limit
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.RateLimitStatus.RemainingRequestCount">
+            <summary>
+            Remaining Request Count to GitHub API 
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.RateLimitStatus.RateLimitReset_UnixEpochSeconds">
+            <summary>
+            Rate Limit Reset Time Stamp in Unix Epoch Seconds
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.RateLimitStatus.RateLimitReset_DateTime">
+            <summary>
+            Rate Limit Reset Time Stamp
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.RateLimitStatus.ToString">
+            <summary>
+            Rate Limit Status To String
+            </summary>
+            <returns>Rate Limit Status</returns>
+        </member>
+        <member name="T:GitHubApiStatus.GitHubApiRateLimits">
+            <summary>
+            Rate Limit data for each GitHub API
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiRateLimits.#ctor(GitHubApiStatus.RateLimitStatus,GitHubApiStatus.RateLimitStatus,GitHubApiStatus.RateLimitStatus,GitHubApiStatus.RateLimitStatus,GitHubApiStatus.RateLimitStatus,GitHubApiStatus.RateLimitStatus)">
+            <summary>
+            Create GitHubApiRateLimits
+            </summary>
+            <param name="core">REST API</param>
+            <param name="search">Search API</param>
+            <param name="graphql">GraphQL API</param>
+            <param name="source_import">Source Import API</param>
+            <param name="integration_manifest">Integration Manifest API</param>
+            <param name="code_scanning_upload">Code Scanning API</param>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiRateLimits.RestApi">
+            <summary>
+            REST API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiRateLimits.SearchApi">
+            <summary>
+            Search API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiRateLimits.GraphQLApi">
+            <summary>
+            GraphQL API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiRateLimits.SourceImport">
+            <summary>
+            Source Import API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiRateLimits.CodeScanningUpload">
+            <summary>
+            Code Scanning API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.GitHubApiRateLimits.AppManifestConfiguration">
+            <summary>
+            App Manifest Configuration API Rate Limit Status
+            </summary>
+        </member>
+        <member name="T:GitHubApiStatus.IGitHubApiRateLimits">
+            <summary>
+            Interface for GitHub API Rate Limits
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiRateLimits.RestApi">
+            <summary>
+            REST API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiRateLimits.SearchApi">
+            <summary>
+            Search API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiRateLimits.GraphQLApi">
+            <summary>
+            GraphQL API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiRateLimits.SourceImport">
+            <summary>
+            Source Import API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiRateLimits.CodeScanningUpload">
+            <summary>
+            Code Scanning API Rate Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiRateLimits.AppManifestConfiguration">
+            <summary>
+            App Manifest Configuration API Rate Limit Status
+            </summary>
+        </member>
+        <member name="T:GitHubApiStatus.IRateLimitStatus">
+            <summary>
+            Interface for GitHub API Raite Limit Status
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IRateLimitStatus.RateLimitReset_TimeRemaining">
+            <summary>
+            Time Remaining until Rate Limit Reset
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IRateLimitStatus.RateLimit">
+            <summary>
+            GitHub API Rate Limit
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IRateLimitStatus.RemainingRequestCount">
+            <summary>
+            Remaining Request Count to GitHub API 
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IRateLimitStatus.RateLimitReset_UnixEpochSeconds">
+            <summary>
+            Rate Limit Reset Time Stamp in Unix Epoch Seconds
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IRateLimitStatus.RateLimitReset_DateTime">
+            <summary>
+            Rate Limit Reset Time Stamp
+            </summary>
+        </member>
+        <member name="T:GitHubApiStatus.IGitHubApiStatusService">
+            <summary>
+            Interface for GitHubApiStatusService
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiStatusService.IsProductHeaderValueValid">
+            <summary>
+            Determines if GitHubApiClient.DefaultRequestHeaders.UserAgent is Valid
+            </summary>
+        </member>
+        <member name="P:GitHubApiStatus.IGitHubApiStatusService.IsAuthenticationHeaderValueSet">
+            <summary>
+            Determines if GitHubApiClient.DefaultRequestHeaders.Authorization is Valid
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.AddProductHeaderValue(System.Net.Http.Headers.ProductHeaderValue)">
+            <summary>
+            Add ProductHeaderValue to HttpClient.DefaultRequestHeaders.UserAgent
+            </summary>
+            <param name="productHeaderValue"></param>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.SetAuthenticationHeaderValue(System.Net.Http.Headers.AuthenticationHeaderValue)">
+            <summary>
+            Set HttpClient.DefaultRequestHeaders.Authorization
+            </summary>
+            <param name="authenticationHeaderValue"></param>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.GetApiRateLimits(System.Threading.CancellationToken)">
+            <summary>
+            Get the API Rate Limits for the GitHub REST API, GraphQL API, Search API, Code Scanning API and App Manifest Configuration API
+            </summary>
+            <param name="cancellationToken">Cancellation Token</param>
+            <returns></returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.GetRateLimit(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get GitHub API Rate Limit
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>GitHub Api Rate Limit </returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.GetRemainingRequestCount(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get Number of GitHub API Requests Remaining
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Number of GitHub API Requests Remaining</returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.IsAbuseRateLimit(System.Net.Http.Headers.HttpResponseHeaders@,System.Nullable{System.TimeSpan}@)">
+            <summary>
+            Determines Whether GitHub's Abuse Rate Limit Has Been Reached
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <param name="delta">Time Remaining in Retry-After Header</param>
+            <returns></returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.HasReachedMaximumApiCallLimit(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Determines Whether GitHub's Maximum API Limit Has Been Reached
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Whether GitHub's Maximum API Limit Has Been Reached</returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.GetRateLimitTimeRemaining(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get Time Remaining Until GitHub API Rate Limit Resets
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Time Remaining Until GitHub API Rate Limit Resets</returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.IsResponseFromAuthenticatedRequest(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Determines Whether the Http Response Was From an Authenticated Http Request
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Whether the Http Response Was From an Authenticated Http Request</returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.GetRateLimitResetDateTime(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get the DateTimeOffset When the GitHub API Rate Limit Will Reset
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>DateTimeOffset When the GitHub API Rate Limit Will Reset</returns>
+        </member>
+        <member name="M:GitHubApiStatus.IGitHubApiStatusService.GetRateLimitResetDateTime_UnixEpochSeconds(System.Net.Http.Headers.HttpResponseHeaders@)">
+            <summary>
+            Get the Unix Epoch Seconds When the GitHub API Rate Limit Will Reset
+            </summary>
+            <param name="httpResponseHeaders">HttpResponseHeaders from GitHub API Response</param>
+            <returns>Unix Epoch Seconds When the GitHub API Rate Limit Will Reset</returns>
+        </member>
+        <member name="T:GitHubApiStatus.GitHubApiStatusException">
+            <summary>
+            Exception thrown by GitHubApiStatus
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusException.#ctor(System.String)">
+            <summary>
+            Initialize GitHubApiStatusException
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="M:GitHubApiStatus.GitHubApiStatusException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initialize GitHubApiStatusException
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:GitHubApiStatus.HttpResponseHeadersExtensions">
+            <summary>
+            Extension Methods for HttpResponseHeaders
+            </summary>
+        </member>
+        <member name="M:GitHubApiStatus.HttpResponseHeadersExtensions.DoesContainGitHubRateLimitHeader(System.Net.Http.Headers.HttpResponseHeaders)">
+            <summary>
+            Returns whether HttpResponseHeaders Contain X-RateLimit-Limit
+            </summary>
+            <param name="responseHeaders"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GitHubApiStatus.HttpResponseHeadersExtensions.DoesContainGitHubRateLimitResetHeader(System.Net.Http.Headers.HttpResponseHeaders)">
+            <summary>
+            Returns whether HttpResponseHeaders Contain X-RateLimit-Reset
+            </summary>
+            <param name="responseHeaders"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GitHubApiStatus.HttpResponseHeadersExtensions.DoesContainGitHubRateLimitRemainingHeader(System.Net.Http.Headers.HttpResponseHeaders)">
+            <summary>
+            Returns whether HttpResponseHeaders Contain X-RateLimit-Remaining
+            </summary>
+            <param name="responseHeaders"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
